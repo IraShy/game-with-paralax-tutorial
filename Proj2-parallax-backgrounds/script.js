@@ -4,13 +4,9 @@ const ctx = canvas.getContext("2d"); // create an instance of built-in canvas 2d
 // if we don't set canvas width and height, it will default to 300x150 px
 const CANVAS_WIDTH = (canvas.width = 800); // set it to the value we set up in css
 const CANVAS_HEIGHT = (canvas.height = 700);
-// -----------------------------
+let gameSpeed = 5;
 
-// I want the scroll speed to be dynamic, tied to a variable so in our game we can speed up or slow down using the special moves
-let gameSpeed = 10;
-
-const backgroundLayer1 = new Image(); // same functionality as document.createElement('img')
-// we can use .appendChild() and it will add <img> into our html file. We can also choose not to append it and it will stay hidden, and it will just store the image for us
+const backgroundLayer1 = new Image();
 backgroundLayer1.src = "backgroundLayers/layer-1.png";
 const backgroundLayer2 = new Image();
 backgroundLayer2.src = "backgroundLayers/layer-2.png";
@@ -21,62 +17,14 @@ backgroundLayer4.src = "backgroundLayers/layer-4.png";
 const backgroundLayer5 = new Image();
 backgroundLayer5.src = "backgroundLayers/layer-5.png";
 
-// create animation loop
-// function animate() {
-//   ctx.drawImage(backgroundLayer4, 0, 0); // draw background from the top left corner of canvas
-//   requestAnimationFrame(animate); // pass in the name of the animate function itself so that it runs over and over again in a loop
-// }
-// animate();
-
-// let x = 0;
-
-// function animate() {
-//   // pass in x instead of hard-coded 0 and decrease it so the image moves horizontally
-//   // clear the old "piant", otherwise the image smudges
-//   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-//   ctx.drawImage(backgroundLayer4, x, 0);
-//   // x--; // image moves to the left by 1 pixel per frame
-//   x -= gameSpeed; // image moves faster
-//   requestAnimationFrame(animate);
-// }
-// animate();
-// -------
-// let x = 0;
-
-// function animate() {
-//   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-//   ctx.drawImage(backgroundLayer4, x, 0);
-//   // image is finite; we can repeat it when it runs to its end: set x back to 0 when we reach the end of the image (2400 is the image width)
-//   if (x < -2400) x = 0;
-//   else x -= gameSpeed;
-//   requestAnimationFrame(animate);
-// }
-// animate();
-
-// ------
-// let x = 0;
-// // we'll run the same image twice before setting x back to 0 - in order to avoid the black gap
-// let x2 = 2400; // adding the second variable and setting it to the width of the image
-
-// function animate() {
-//   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-//   ctx.drawImage(backgroundLayer3, x, 0);
-//   ctx.drawImage(backgroundLayer3, x2, 0);
-//   // if (x < -2400) x = 2400;
-//   // else x -= gameSpeed;
-//   // if (x2 < -2400) x2 = 2400;
-//   // else x2 -= gameSpeed;
-//   // we now have a gap between the images, and part of the gap is equal to the gameSpeed value, and the other part is there if the image width is not divisible by the gameSpeed value
-//   if (x < -2400) x = 2400 + x2 - gameSpeed;
-//   else x -= gameSpeed;
-//   if (x2 < -2400) x2 = 2400 + x - gameSpeed;
-//   else x2 -= gameSpeed;
-//   requestAnimationFrame(animate);
-// }
-// animate();
-
-// ------
-// clean the code, get rid of the repetitions and use JS classes
+const slider = document.getElementById("slider");
+slider.value = gameSpeed;
+const showGameSpeed = document.getElementById("showGameSpeed");
+showGameSpeed.innerHTML = gameSpeed;
+slider.addEventListener("change", function (e) {
+  gameSpeed = e.target.value;
+  showGameSpeed.innerHTML = e.target.value;
+});
 
 class Layer {
   constructor(image, speedModifier) {
