@@ -5,6 +5,7 @@ const ctx = canvas.getContext("2d"); // create an instance of built-in canvas 2d
 const CANVAS_WIDTH = (canvas.width = 800); // set it to the value we set up in css
 const CANVAS_HEIGHT = (canvas.height = 700);
 let gameSpeed = 5;
+// let gameFrame = 0;
 
 const backgroundLayer1 = new Image();
 backgroundLayer1.src = "backgroundLayers/layer-1.png";
@@ -43,6 +44,8 @@ class Layer {
     }
 
     this.x = this.x - this.speed;
+    // this.x = (gameFrame * this.speed) % this.width;
+    // this one line creates the same parallax effect, however if we change the game speed the frame will jump
   }
   draw() {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -70,6 +73,7 @@ function animate() {
     object.update();
     object.draw();
   });
+  // gameFrame--;
   requestAnimationFrame(animate);
 }
 animate();
