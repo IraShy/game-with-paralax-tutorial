@@ -64,5 +64,3 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
-
-// 1:36:07
