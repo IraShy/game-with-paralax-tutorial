@@ -157,7 +157,6 @@ function drawGameOver() {
 
 window.addEventListener("mousedown", function (e) {
   const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);
-  console.log(detectPixelColor);
   const pc = detectPixelColor.data;
   ravens.forEach((object) => {
     if (
@@ -169,7 +168,6 @@ window.addEventListener("mousedown", function (e) {
       object.markedForDeletion = true;
       score++;
       explosions.push(new Explosion(object.x, object.y, object.width));
-      console.log(explosions);
     }
   });
 });
